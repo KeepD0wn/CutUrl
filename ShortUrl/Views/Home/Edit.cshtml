@@ -1,0 +1,32 @@
+﻿@model ShortUrl.Models.Link
+
+@{
+    ViewBag.Title = "Редактирование";
+}
+
+
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.Count)
+        @Html.HiddenFor(m => m.CreatedData)
+        <br />
+        <p>
+            <h5>
+                @Html.LabelFor(m => m.LongURL, "Ссылка")
+            </h5>
+            @Html.TextBoxFor(m => m.LongURL, new { @class = "form-control" })
+        </p>
+        <p>
+            <h5>
+                @Html.LabelFor(m => m.ShortUrl, "Сокращённая ссылка")
+            </h5>
+            @Html.TextBoxFor(m => m.ShortUrl, new { @class = "form-control" })
+        </p>
+        <div class="mt-4">
+            <input type="submit" value="Отправить" class="btn btn-default bg-warning" />
+        </div>        
+    </div>            
+    
+}

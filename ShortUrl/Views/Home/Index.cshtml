@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ShortUrl.Models.Link>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>
+        <table class="text-info" align="center" width="100%" >
+            <tr>
+                <td width="30%" align="left">
+                    <h5>Ссылка</h5>
+                </td>
+                <td width="20%">
+                    <h5>Сокращённая ссылка</h5>
+                </td>
+                <td width="20%">
+                    <h5>Дата создания</h5>
+                </td>
+                <td width="10%">
+                    <h5>Кол-во переходов</h5>
+                </td>
+                <td width="10%">
+                </td>
+                <td width="10%">
+                </td>
+                <br />
+            </tr>
+        </table>
+
+        <form method="post">
+
+            @foreach (ShortUrl.Models.Link link in Model)
+            {
+                <table align="center" width="100%" >
+                    <tr>
+                        <td width="30%" align="left">
+                            @link.LongURL
+                        </td>
+                        <td width="20%">
+                            @link.ShortUrl
+                        </td>
+                        <td width="20%">
+                            @link.CreatedData
+                        </td>
+                        <td width="10%">
+                            @link.Count
+                        </td>
+                        <td width="10%">
+                            <a href='@Url.Action("Delete", "Home", new {id = link.Id })'> Удалить </a>
+                        </td>
+                        <td width="10%">
+                            <a href='@Url.Action("Edit", "Home", new {id = link.Id })'> Редактировать </a>
+                        </td>
+                        <br />
+                    </tr>
+                </table>
+            }
+        </form>
+    </p>
+</div>

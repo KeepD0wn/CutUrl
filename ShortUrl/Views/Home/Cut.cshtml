@@ -1,0 +1,23 @@
+﻿@model ShortUrl.Models.Link
+
+
+@{
+    ViewBag.Title = "Create";
+
+}
+
+
+    
+        @using (Html.BeginForm())
+        {
+            <br />
+            <div class="form-group">
+                <h5>Введите строку для сокращения</h5>
+                @Html.TextBoxFor(x => x.LongURL, new { @class = "form-control" })                
+                <div class="mt-4" >
+                    <input type="submit" value="Отправить" class="btn btn-default bg-success" />
+                </div>
+            </div>
+            
+        }
+   
