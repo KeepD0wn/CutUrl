@@ -33,14 +33,14 @@ namespace ShortUrl.Controllers
                 {
                     Link link = (from x in context.Links
                                  where x.ShortUrl == question
-                                 select x).Single<Link>();
+                                 select x).FirstOrDefault();
                     link.Count += 1;
                     context.SaveChanges();
                     Response.Redirect(link.LongURL);
                 }
-                catch
+                catch (Exception ex)
                 {
-
+                    return NotFound(ex.Message);
                 }
 
             }
@@ -65,9 +65,9 @@ namespace ShortUrl.Controllers
             {
                 context.SaveChanges();
             }
-            catch
+            catch (Exception ex)
             {
-
+                return NotFound(ex.Message);
             }
 
             return RedirectToAction("Index");
@@ -76,8 +76,7 @@ namespace ShortUrl.Controllers
         private string DoUrl(int letters)
         {
             Random rnd = new Random();
-
-            StringBuilder sb = new StringBuilder(letters);
+            StringBuilder sb = new StringBuilder(letters);           
             string letterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
             for (int i = 0; i < letters; i++)
                 sb.Append(letterSet[rnd.Next(letterSet.Length)]);
@@ -96,11 +95,11 @@ namespace ShortUrl.Controllers
                 {                    
                     context.SaveChanges();
                 }
-                catch
+                catch (Exception ex)
                 {
-
+                    return NotFound(ex.Message);
                 }
-                
+
                 return RedirectToAction("Index");
             }
 
@@ -131,9 +130,9 @@ namespace ShortUrl.Controllers
                 context.Entry(link).State = EntityState.Modified;
                 context.SaveChanges();
             }
-            catch
+            catch(Exception ex)
             {
-
+                return NotFound(ex.Message);
             }
            
             return RedirectToAction("Index");

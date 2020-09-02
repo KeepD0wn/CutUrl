@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gvozd\\Desktop\\ShortUrl-master\\ShortUrl\\ShortUrl.csproj": {}
+    "C:\\Users\\gvozd\\Desktop\\ShortUrl\\ShortUrl\\ShortUrl.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gvozd\\Desktop\\ShortUrl-master\\ShortUrl\\ShortUrl.csproj": {
+    "C:\\Users\\gvozd\\Desktop\\ShortUrl\\ShortUrl\\ShortUrl.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gvozd\\Desktop\\ShortUrl-master\\ShortUrl\\ShortUrl.csproj",
+        "projectUniqueName": "C:\\Users\\gvozd\\Desktop\\ShortUrl\\ShortUrl\\ShortUrl.csproj",
         "projectName": "ShortUrl",
-        "projectPath": "C:\\Users\\gvozd\\Desktop\\ShortUrl-master\\ShortUrl\\ShortUrl.csproj",
+        "projectPath": "C:\\Users\\gvozd\\Desktop\\ShortUrl\\ShortUrl\\ShortUrl.csproj",
         "packagesPath": "C:\\Users\\gvozd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gvozd\\Desktop\\ShortUrl-master\\ShortUrl\\obj\\",
+        "outputPath": "C:\\Users\\gvozd\\Desktop\\ShortUrl\\ShortUrl\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

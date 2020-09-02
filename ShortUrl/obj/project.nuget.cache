@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FN9gujlCpPf7D09Me0hBx6pikz+Z2DFKpLJ+5ao5O94vj1w/GJmkCRWlmiFWKZnOmj2fSYjYc6IR5GocsorgWQ==",
+  "dgSpecHash": "jI8kE/RmbGbjlbaBDJ5P5nxGi+5tqo04fLhghDMjGPHNfoG/gIJ0FM+9drWuMcWHZloKQp8WPR5IdLxrskPHZQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gvozd\\Desktop\\ShortUrl-master\\ShortUrl\\ShortUrl.csproj",
+  "projectFilePath": "C:\\Users\\gvozd\\Desktop\\ShortUrl\\ShortUrl\\ShortUrl.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gvozd\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\gvozd\\.nuget\\packages\\google.protobuf\\3.6.1\\google.protobuf.3.6.1.nupkg.sha512",
