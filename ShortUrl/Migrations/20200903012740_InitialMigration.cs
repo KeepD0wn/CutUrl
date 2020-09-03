@@ -22,6 +22,12 @@ namespace ShortUrl.Migrations
                 {
                     table.PrimaryKey("PK_Links", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Links_ShortUrl",
+                table: "Links",
+                column: "ShortUrl",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -13,7 +13,14 @@ namespace ShortUrl
     {
         public LinksContext(DbContextOptions options) : base(options)
         {
-           // Database.EnsureCreated();
+           
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Link>()
+                .HasIndex(x => new { x.ShortUrl })
+                .IsUnique(true);
         }
 
         public DbSet<Link> Links { get; set; }

@@ -32,9 +32,12 @@ namespace ShortUrl.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ShortUrl")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(767)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ShortUrl")
+                        .IsUnique();
 
                     b.ToTable("Links");
                 });

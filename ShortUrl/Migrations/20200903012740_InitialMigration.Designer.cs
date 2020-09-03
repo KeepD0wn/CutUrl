@@ -8,7 +8,7 @@ using ShortUrl;
 namespace ShortUrl.Migrations
 {
     [DbContext(typeof(LinksContext))]
-    [Migration("20200902225305_InitialMigration")]
+    [Migration("20200903012740_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,9 +34,12 @@ namespace ShortUrl.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ShortUrl")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(767)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ShortUrl")
+                        .IsUnique();
 
                     b.ToTable("Links");
                 });
