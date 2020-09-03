@@ -273,5 +273,8 @@ C:\Users\gvozd\Desktop\ShortUrl\ShortUrl\obj\Debug\netcoreapp3.1\ShortUrl.genrun
 C:\Users\gvozd\Desktop\ShortUrl\ShortUrl\bin\Debug\netcoreapp3.1\MySql.Data.EntityFrameworkCore.dll
 C:\Users\gvozd\Desktop\ShortUrl\ShortUrl\bin\Debug\netcoreapp3.1\SshNet.Security.Cryptography.dll
 C:\Users\gvozd\Desktop\ShortUrl\ShortUrl\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
+C:\Users\gvozd\Desktop\ShortUrl\ShortUrl\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\gvozd\Desktop\ShortUrl\ShortUrl\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\gvozd\Desktop\ShortUrl\ShortUrl\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\gvozd\Desktop\ShortUrl\ShortUrl\obj\Debug\netcoreapp3.1\ShortUrl.csproj.CoreCompileInputs.cache
 C:\Users\gvozd\Desktop\ShortUrl\ShortUrl\obj\Debug\netcoreapp3.1\ShortUrl.MvcApplicationPartsAssemblyInfo.cache

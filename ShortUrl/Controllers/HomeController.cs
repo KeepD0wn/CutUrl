@@ -23,7 +23,7 @@ namespace ShortUrl.Controllers
         }
 
         public ActionResult Index()
-        {            
+        {
             string question = HttpContext.Request.Query["id"].ToString();
             string test = HttpContext.Request.Path;
 
@@ -34,9 +34,17 @@ namespace ShortUrl.Controllers
                     Link link = (from x in context.Links
                                  where x.ShortUrl == question
                                  select x).FirstOrDefault();
-                    link.Count += 1;
-                    context.SaveChanges();
-                    Response.Redirect(link.LongURL);
+                    if (link != null)
+                    {
+                        link.Count += 1;
+                        context.SaveChanges();
+                        Response.Redirect(link.LongURL);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+
                 }
                 catch (Exception ex)
                 {
