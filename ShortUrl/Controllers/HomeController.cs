@@ -50,27 +50,32 @@ namespace ShortUrl.Controllers
         [HttpGet]
         public ActionResult Cut()
         {
-
             return View();
         }
 
         [HttpPost]
         public ActionResult Cut(Link link)
         {
-            link.CreatedData = DateTime.Now.ToString();
-            link.ShortUrl = DoUrl(6);
-
-            context.Links.Add(link);
-            try
+            if (ModelState.IsValid)
             {
-                context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+                link.CreatedData = DateTime.Now.ToString();
+                link.ShortUrl = DoUrl(6);
 
-            return RedirectToAction("Index");
+                context.Links.Add(link);
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return NotFound(ex.Message);
+                }
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         private string DoUrl(int letters)
@@ -125,17 +130,25 @@ namespace ShortUrl.Controllers
         [HttpPost]
         public ActionResult Edit(Link link)
         {
-            try
+            if (ModelState.IsValid)
             {
-                context.Entry(link).State = EntityState.Modified;
-                context.SaveChanges();
+                try
+                {
+                    context.Entry(link).State = EntityState.Modified;
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return NotFound(ex.Message);
+                }
+
+                return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            else
             {
-                return NotFound(ex.Message);
+                return View();
             }
-           
-            return RedirectToAction("Index");
+            
         }
 
     }

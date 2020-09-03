@@ -13,9 +13,13 @@
         @Html.HiddenFor(m => m.CreatedData)
         <br />
         <p>
+
             <h5>
                 @Html.LabelFor(m => m.LongURL, "Ссылка")
             </h5>
+            <h6>
+                @Html.ValidationMessageFor(x => x.LongURL, "", new { @class = "text-danger" })
+            </h6>
             @Html.TextBoxFor(m => m.LongURL, new { @class = "form-control" })
         </p>
         <p>
