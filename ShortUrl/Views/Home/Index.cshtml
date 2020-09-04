@@ -39,7 +39,8 @@
                             @link.LongURL
                         </td>
                         <td width="20%">
-                            <a href="https://myurl-short.xyz/?id=@link.ShortUrl">https://myurl-short.xyz/?id=@link.ShortUrl</a>
+                            @*<a href="https://myurl-short.xyz/?id=@link.ShortUrl">https://myurl-short.xyz/?id=@link.ShortUrl</a>*@
+                            <a href="@ViewBag.url@link.ShortUrl">@ViewBag.url@link.ShortUrl</a>
                         </td>
                         <td width="20%">                            
                             @link.CreatedData

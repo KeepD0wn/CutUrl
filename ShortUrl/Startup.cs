@@ -27,7 +27,7 @@ namespace ShortUrl
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LinksContext>(options =>
-            options.UseMySQL("server=localhost;port=3306;username=u1139_admin;password=MyNewPassword1;database=u1139419_mariadb"));
+            options.UseMySQL("server=localhost;port=3306;username=root;password=root;database=mariadb"));
 
             services.AddControllersWithViews();
         }

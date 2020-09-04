@@ -15,7 +15,7 @@ namespace ShortUrl.Controllers
 {
     public class HomeController : Controller
     {
-        LinksContext context;
+         LinksContext context;
 
         public HomeController(LinksContext context)
         {
@@ -25,7 +25,8 @@ namespace ShortUrl.Controllers
         public ActionResult Index()
         {
             string question = HttpContext.Request.Query["id"].ToString();
-            string test = HttpContext.Request.Path;
+            ViewBag.url = HttpContext.Request.Scheme+ "://" +""+HttpContext.Request.Host.ToString()+ "/?id=";
+            //передаём строку текущего Url, что бы к ней добавить параметр id
 
             if (question != "")
             {
@@ -34,7 +35,7 @@ namespace ShortUrl.Controllers
                     Link link = (from x in context.Links
                                  where x.ShortUrl == question
                                  select x).FirstOrDefault();
-                    if (link != null)
+                    if (link != null) //если есть запись в БД с таким же ShortUrl
                     {
                         link.Count += 1;
                         context.SaveChanges();
@@ -64,11 +65,22 @@ namespace ShortUrl.Controllers
         [HttpPost]
         public ActionResult Cut(Link link)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) //проверка на ошибки в аттрибутах модели
             {
                 link.CreatedData = DateTime.Now.ToString();
-                link.ShortUrl = DoUrl(6);
+                link.ShortUrl = DoUrl(7);
 
+                Link link1 = (from x in context.Links
+                             where x.ShortUrl == link.ShortUrl
+                              select x).FirstOrDefault();
+                if (link1!=null) //если нашли запись с таким же ShortUrl, то перерандомим
+                {
+                    while (link1.ShortUrl == link.ShortUrl)
+                    {
+                        link.ShortUrl = DoUrl(7);
+                    }
+                }
+                
                 context.Links.Add(link);
                 try
                 {
@@ -112,8 +124,6 @@ namespace ShortUrl.Controllers
                 {
                     return NotFound(ex.Message);
                 }
-
-                return RedirectToAction("Index");
             }
 
             return RedirectToAction("Index");
@@ -126,24 +136,33 @@ namespace ShortUrl.Controllers
             {
                 return NotFound("Ресурс в приложении не найден");
             }
-            Link book = context.Links.Find(id);
+            Link link = context.Links.Find(id);
 
-            if (book == null)
+            if (link == null)
             {
                 return NotFound("Ресурс в приложении не найден");
             }
-            return View(book);
+            return View(link);
         }
 
         [HttpPost]
         public ActionResult Edit(Link link)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) //проверка на ошибки в аттрибутах модели
             {
                 try
                 {
                     context.Entry(link).State = EntityState.Modified;
-                    context.SaveChanges();
+
+                    Link link1 = (from x in context.Links
+                                 where x.ShortUrl == link.ShortUrl
+                                 select x).FirstOrDefault();
+
+                    if (link1==null) //если получается, что таких ShortUrl нет в БД, то сохраняем
+                    {
+                        context.SaveChanges();
+                    }
+                    
                 }
                 catch (Exception ex)
                 {
