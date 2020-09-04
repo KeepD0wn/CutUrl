@@ -7,23 +7,23 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>
-        <table class="text-info" align="center" width="100%" >
+        <table class="text-info tableWr" >
             <tr>
-                <td width="30%" align="left">
+                <td class="wr" align="left">
                     <h5>Ссылка</h5>
                 </td>
-                <td width="20%">
+                <td class="td1">
                     <h5>Сокращённая ссылка</h5>
                 </td>
-                <td width="20%">
+                <td class="td2">
                     <h5>Дата создания</h5>
                 </td>
-                <td width="10%">
+                <td class="td3">
                     <h5>Кол-во переходов</h5>
                 </td>
-                <td width="10%">
+                <td class="td4">
                 </td>
-                <td width="10%">
+                <td class="td5">
                 </td>
                 <br />
             </tr>
@@ -33,30 +33,30 @@
 
             @foreach (ShortUrl.Models.Link link in Model)
             {
-                <table align="center" width="100%" >
-                    <tr>
-                        <td class="wr" width="30%" align="left">
-                            @link.LongURL
-                        </td>
-                        <td width="20%">
-                            @*<a href="https://myurl-short.xyz/?id=@link.ShortUrl">https://myurl-short.xyz/?id=@link.ShortUrl</a>*@
-                            <a href="@ViewBag.url@link.ShortUrl">@ViewBag.url@link.ShortUrl</a>
-                        </td>
-                        <td width="20%">                            
-                            @link.CreatedData
-                        </td>
-                        <td width="10%">
-                            @link.Count
-                        </td>
-                        <td width="10%">
-                            <a href='@Url.Action("Delete", "Home", new {id = link.Id })'> Удалить </a>
-                        </td>
-                        <td width="10%">
-                            <a href='@Url.Action("Edit", "Home", new {id = link.Id })'> Редактировать </a>
-                        </td>
-                        <br />
-                    </tr>
-                </table>
+            <table class="tableWr">
+                <tr>
+                    <td class="wr" align="left">
+                        @link.LongURL
+                    </td>
+                    <td class="td1">
+                        @*<a href="https://myurl-short.xyz/?id=@link.ShortUrl">https://myurl-short.xyz/?id=@link.ShortUrl</a>*@
+                        <a href="@ViewBag.url@link.ShortUrl">@ViewBag.url@link.ShortUrl</a>
+                    </td>
+                    <td class="td2">
+                        @link.CreatedData
+                    </td>
+                    <td class="td3">
+                        @link.Count
+                    </td>
+                    <td class="td4">
+                        <a class="delete" href='@Url.Action("Delete", "Home", new {id = link.Id })'> Удалить </a>
+                    </td>
+                    <td class="td5">
+                        <a class="edit" href='@Url.Action("Edit", "Home", new {id = link.Id })'> Редактировать </a>
+                    </td>
+                    <br />
+                </tr>
+            </table>
             }
         </form>
     </p>
