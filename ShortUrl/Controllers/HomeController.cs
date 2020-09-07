@@ -22,7 +22,7 @@ namespace ShortUrl.Controllers
             this.context = context;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
             string question = HttpContext.Request.Query["id"].ToString();
             ViewBag.url = HttpContext.Request.Scheme+ "://" +""+HttpContext.Request.Host.ToString()+ "/?id=";
@@ -149,7 +149,7 @@ namespace ShortUrl.Controllers
         public ActionResult Edit(Link link)
         {
             if (ModelState.IsValid) //проверка на ошибки в аттрибутах модели
-            {
+            {               
                 try
                 {
                     context.Entry(link).State = EntityState.Modified;
@@ -166,7 +166,7 @@ namespace ShortUrl.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return NotFound(ex.Message);
+                    return RedirectToAction("Index");
                 }
 
                 return RedirectToAction("Index");
