@@ -23,11 +23,14 @@ namespace ShortUrl
 
         public IConfiguration Configuration { get; }
 
+        CreateDB createDB = new CreateDB();
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            createDB.CreateDBandTable(Configuration.GetConnectionString("LinksContext"),"NewDB");
             services.AddDbContext<LinksContext>(options =>
-            options.UseMySQL("server=localhost;port=3306;username=root;password=root;database=mariadb"));
+            options.UseMySQL(Configuration.GetConnectionString("LinksContext")));
 
             services.AddControllersWithViews();
         }

@@ -3,7 +3,7 @@ using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace ShortUrl.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace ShortUrl.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    LongURL = table.Column<string>(nullable: true),
+                    LongURL = table.Column<string>(nullable: false),
                     ShortUrl = table.Column<string>(nullable: true),
                     CreatedData = table.Column<string>(nullable: true),
                     Count = table.Column<int>(nullable: false)

@@ -29,6 +29,7 @@ namespace ShortUrl.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("LongURL")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ShortUrl")

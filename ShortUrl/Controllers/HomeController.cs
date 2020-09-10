@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualBasic;
 using ShortUrl.Models;
+using MySql.Data.MySqlClient;
 
 namespace ShortUrl.Controllers
 {
@@ -23,7 +24,7 @@ namespace ShortUrl.Controllers
         }
 
         public ActionResult Index(string id)
-        {
+        {           
             string question = HttpContext.Request.Query["id"].ToString();
             ViewBag.url = HttpContext.Request.Scheme+ "://" +""+HttpContext.Request.Host.ToString()+ "/?id=";
             //передаём строку текущего Url, что бы к ней добавить параметр id
