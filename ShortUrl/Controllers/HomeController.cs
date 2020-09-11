@@ -24,7 +24,8 @@ namespace ShortUrl.Controllers
         }
 
         public ActionResult Index(string id)
-        {           
+        {
+            context.Database.EnsureCreated();
             string question = HttpContext.Request.Query["id"].ToString();
             ViewBag.url = HttpContext.Request.Scheme+ "://" +""+HttpContext.Request.Host.ToString()+ "/?id=";
             //передаём строку текущего Url, что бы к ней добавить параметр id

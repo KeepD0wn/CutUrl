@@ -17,10 +17,12 @@ namespace ShortUrl
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        {            
             modelBuilder.Entity<Link>()
                 .HasIndex(x => new { x.ShortUrl })
                 .IsUnique(true);
+
+            modelBuilder.Entity<Link>().Property(x => x.ShortUrl).IsRequired();            
         }
 
         public DbSet<Link> Links { get; set; }

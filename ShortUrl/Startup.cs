@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShortUrl.Models;
 using MySql.Data.EntityFrameworkCore.Extensions;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace ShortUrl
 {
@@ -21,14 +22,11 @@ namespace ShortUrl
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        CreateDB createDB = new CreateDB();
+        public IConfiguration Configuration { get; }      
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            createDB.CreateDBandTable(Configuration.GetConnectionString("LinksContext"),"NewDB");
+        {         
             services.AddDbContext<LinksContext>(options =>
             options.UseMySQL(Configuration.GetConnectionString("LinksContext")));
 
