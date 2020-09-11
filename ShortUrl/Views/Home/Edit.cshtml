@@ -26,11 +26,27 @@
         <p>
             <h5>
                 @Html.LabelFor(m => m.ShortUrl, "Короткая ссылка")
-            </h5>            
+            </h5>
+            @{
+                try
+                {
+                    if (Model.ShortUrl != ViewBag.currentSU)
+                    {
+
+                        <h6 id="editError" class="text-danger">
+                            Такая ссылка уже используется
+                        </h6>
+                    }
+                }
+                catch
+                {
+
+                }
+            }
             @Html.TextBoxFor(m => m.ShortUrl, new { @class = "form-control" })
         </p>
         <div class="mt-4">
-            <input type="submit" value="Отправить" class="btn btn-default bg-warning" />
+            <input type="submit" value="Отправить" onclick="showhide()" class="btn btn-default bg-warning" />
         </div>        
     </div>            
     

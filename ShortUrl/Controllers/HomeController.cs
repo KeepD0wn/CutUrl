@@ -139,6 +139,7 @@ namespace ShortUrl.Controllers
                 return NotFound("Ресурс в приложении не найден");
             }
             Link link = context.Links.Find(id);
+            ViewBag.currentSU = link.ShortUrl;
 
             if (link == null)
             {
@@ -149,7 +150,7 @@ namespace ShortUrl.Controllers
 
         [HttpPost]
         public ActionResult Edit(Link link)
-        {
+        {           
             if (ModelState.IsValid) //проверка на ошибки в аттрибутах модели
             {               
                 try
@@ -163,15 +164,17 @@ namespace ShortUrl.Controllers
                     if (link1==null) //если получается, что таких ShortUrl нет в БД, то сохраняем
                     {
                         context.SaveChanges();
+                        return RedirectToAction("Index");
                     }
+                   
                     
+                    return View(link1);
+
                 }
                 catch (Exception ex)
                 {
                     return RedirectToAction("Index");
-                }
-
-                return RedirectToAction("Index");
+                }                
             }
             else
             {
