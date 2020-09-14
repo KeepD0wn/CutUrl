@@ -1,4 +1,5 @@
 ﻿@model ShortUrl.Models.Link
+@using ShortUrl.Controllers
 
 @{
     ViewBag.Title = "Редактирование";
@@ -30,9 +31,8 @@
             @{
                 try
                 {
-                    if (Model.ShortUrl != ViewBag.currentSU)
+                    if (ViewBag.currentSU!=Model.ShortUrl)
                     {
-
                         <h6 id="editError" class="text-danger">
                             Такая ссылка уже используется
                         </h6>
@@ -44,9 +44,10 @@
                 }
             }
             @Html.TextBoxFor(m => m.ShortUrl, new { @class = "form-control" })
+
         </p>
         <div class="mt-4">
-            <input type="submit" value="Отправить" onclick="showhide()" class="btn btn-default bg-warning" />
+            <input type="submit" value="Отправить" class="btn btn-default bg-warning" />
         </div>        
     </div>            
     

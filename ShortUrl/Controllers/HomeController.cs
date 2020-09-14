@@ -136,39 +136,50 @@ namespace ShortUrl.Controllers
         {
             if (id == null)
             {
-                return NotFound("Ресурс в приложении не найден");
+                return RedirectToAction("Index");
             }
             Link link = context.Links.Find(id);
             ViewBag.currentSU = link.ShortUrl;
 
             if (link == null)
             {
-                return NotFound("Ресурс в приложении не найден");
+                return RedirectToAction("Index");
             }
             return View(link);
         }
 
         [HttpPost]
-        public ActionResult Edit(Link link)
+        public ActionResult Edit(Link link,int id)                         
         {           
             if (ModelState.IsValid) //проверка на ошибки в аттрибутах модели
             {               
                 try
-                {
-                    context.Entry(link).State = EntityState.Modified;
+                {                    
+                    Link previousLink = context.Links.Find(id);
+                    ViewBag.currentSU = previousLink.ShortUrl;
+
+                    if (previousLink.ShortUrl != link.ShortUrl)
+                    {
+                        previousLink.ShortUrl = link.ShortUrl;
+                    }
+                    if (previousLink.LongURL != link.LongURL)
+                    {                        
+                        previousLink.ShortUrl = DoUrl(7);
+                    }
+                    
+                    previousLink.LongURL = link.LongURL;                    
 
                     Link link1 = (from x in context.Links
-                                 where x.ShortUrl == link.ShortUrl
-                                 select x).FirstOrDefault();
+                                 where x.ShortUrl == previousLink.ShortUrl
+                                 select x).FirstOrDefault();                   
 
                     if (link1==null) //если получается, что таких ShortUrl нет в БД, то сохраняем
-                    {
+                    {                        
                         context.SaveChanges();
                         return RedirectToAction("Index");
                     }
-                   
                     
-                    return View(link1);
+                    return View(link);
 
                 }
                 catch (Exception ex)
