@@ -154,18 +154,18 @@ namespace ShortUrl.Controllers
             if (ModelState.IsValid) //проверка на ошибки в аттрибутах модели
             {               
                 try
-                {                    
+                {
                     Link previousLink = context.Links.Find(id);
                     ViewBag.currentSU = previousLink.ShortUrl;
 
-                    if (previousLink.ShortUrl != link.ShortUrl)
+                    if (previousLink.ShortUrl != link.ShortUrl) //если изменили шортюрл, то меняем его
                     {
                         previousLink.ShortUrl = link.ShortUrl;
                     }
-                    if (previousLink.LongURL != link.LongURL)
+                    else if (previousLink.LongURL != link.LongURL) //если шортюрл не меняли, но поменяли юрл, то меняем шортюрл на рандом
                     {                        
                         previousLink.ShortUrl = DoUrl(7);
-                    }
+                    }                   
                     
                     previousLink.LongURL = link.LongURL;                    
 
