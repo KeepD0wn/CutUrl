@@ -23,38 +23,31 @@ namespace ShortUrl.Controllers
             this.context = context;
         }
 
-        public ActionResult Index(string id)
+        [Route("{url}")]
+        public void Index2(string url)
         {
-            context.Database.EnsureCreated();
-            string question = HttpContext.Request.Query["id"].ToString();
-            ViewBag.url = HttpContext.Request.Scheme+ "://" +""+HttpContext.Request.Host.ToString()+ "/?id=";
-            //передаём строку текущего Url, что бы к ней добавить параметр id
-
-            if (question != "")
+            Link link = (from x in context.Links
+                         where x.ShortUrl == url
+                         select x).FirstOrDefault();
+            if (link != null) //если есть запись в БД с таким же ShortUrl
             {
-                try
-                {
-                    Link link = (from x in context.Links
-                                 where x.ShortUrl == question
-                                 select x).FirstOrDefault();
-                    if (link != null) //если есть запись в БД с таким же ShortUrl
-                    {
-                        link.Count += 1;
-                        context.SaveChanges();
-                        Response.Redirect(link.LongURL);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index");
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    return NotFound(ex.Message);
-                }
-
+                link.Count += 1;
+                context.SaveChanges();
+                Response.Redirect(link.LongURL);
             }
+            else
+            {
+                Response.Redirect("Home/Index");
+            }
+           
+        }
+
+        public ActionResult Index(string id)
+        {                        
+            context.Database.EnsureCreated();
+            ViewBag.url = HttpContext.Request.Scheme+ "://" +""+HttpContext.Request.Host.ToString()+ "/";
+            //передаём строку текущего Url, что бы к ней добавить параметр id
+           
             return View(context.Links.OrderBy(x => x.Id));
         }
 
