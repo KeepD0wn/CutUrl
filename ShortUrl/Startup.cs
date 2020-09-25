@@ -28,7 +28,7 @@ namespace ShortUrl
         public void ConfigureServices(IServiceCollection services)
         {         
             services.AddDbContext<LinksContext>(options =>
-            options.UseMySQL(Configuration.GetConnectionString("LinksContext")));
+            options.UseMySQL(Configuration.GetConnectionString("LinksContext")));            
 
             services.AddControllersWithViews();
         }

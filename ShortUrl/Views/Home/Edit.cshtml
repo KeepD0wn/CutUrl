@@ -28,21 +28,9 @@
             <h5>
                 @Html.LabelFor(m => m.ShortUrl, "Короткая ссылка")
             </h5>
-            @{
-                try
-                {
-                    if (ViewBag.currentSU!=Model.ShortUrl)
-                    {
-                        <h6 id="editError" class="text-danger">
-                            Такая ссылка уже используется
-                        </h6>
-                    }
-                }
-                catch
-                {
-
-                }
-            }
+            <h6>
+                @Html.ValidationMessageFor(x => x.ShortUrl, "", new { @class = "text-danger" })
+            </h6>
             @Html.TextBoxFor(m => m.ShortUrl, new { @class = "form-control" })
 
         </p>

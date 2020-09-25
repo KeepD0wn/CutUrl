@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualBasic;
 using ShortUrl.Models;
 using MySql.Data.MySqlClient;
+using System.ComponentModel;
 
 namespace ShortUrl.Controllers
 {
@@ -122,7 +123,7 @@ namespace ShortUrl.Controllers
             }
 
             return RedirectToAction("Index");
-        }
+        }       
 
         [HttpGet]
         public ActionResult Edit(int? id)
@@ -132,7 +133,6 @@ namespace ShortUrl.Controllers
                 return RedirectToAction("Index");
             }
             Link link = context.Links.Find(id);
-            ViewBag.currentSU = link.ShortUrl;
 
             if (link == null)
             {
@@ -142,37 +142,19 @@ namespace ShortUrl.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Link link,int id)                         
+        public ActionResult Edit(Link link)                         
         {           
             if (ModelState.IsValid) //проверка на ошибки в аттрибутах модели
             {               
                 try
                 {
-                    Link previousLink = context.Links.Find(id);
-                    ViewBag.currentSU = previousLink.ShortUrl;
+                    Link link1 = context.Links.Find(link.Id);
+                    link1.LongURL = link.LongURL;
+                    link1.ShortUrl = link.ShortUrl.Trim();
 
-                    if (previousLink.ShortUrl != link.ShortUrl) //если изменили шортюрл, то меняем его
-                    {
-                        previousLink.ShortUrl = link.ShortUrl;
-                    }
-                    else if (previousLink.LongURL != link.LongURL) //если шортюрл не меняли, но поменяли юрл, то меняем шортюрл на рандом
-                    {                        
-                        previousLink.ShortUrl = DoUrl(7);
-                    }                   
-                    
-                    previousLink.LongURL = link.LongURL;                    
+                    context.SaveChanges();
 
-                    Link link1 = (from x in context.Links
-                                 where x.ShortUrl == previousLink.ShortUrl
-                                 select x).FirstOrDefault();                   
-
-                    if (link1==null) //если получается, что таких ShortUrl нет в БД, то сохраняем
-                    {                        
-                        context.SaveChanges();
-                        return RedirectToAction("Index");
-                    }
-                    
-                    return View(link);
+                    return RedirectToAction("Index");
 
                 }
                 catch (Exception ex)

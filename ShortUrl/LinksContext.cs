@@ -13,9 +13,11 @@ namespace ShortUrl
     {
         public LinksContext(DbContextOptions options) : base(options)
         {
-           
+            LinksList = Links.ToList();
         }
 
+        public static List<Link> LinksList;
+      
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {            
             modelBuilder.Entity<Link>()
@@ -26,5 +28,7 @@ namespace ShortUrl
         }
 
         public DbSet<Link> Links { get; set; }
+
+
     }
 }
