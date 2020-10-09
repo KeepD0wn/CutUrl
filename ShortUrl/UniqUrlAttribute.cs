@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using ShortUrl.Models;
 using System;
@@ -22,13 +23,10 @@ namespace ShortUrl
             try
             {
                 string val = value.ToString().Trim();
-                foreach (var obj in LinksContext.LinksList)
+                if (LinksContext.LinksList.Exists(x => x.ShortUrl == val)==true)
                 {
-                    if (obj.ShortUrl == val)
-                    {
-                        return false;
-                    }
-                }                
+                    return false;
+                }   
             }
             catch
             {

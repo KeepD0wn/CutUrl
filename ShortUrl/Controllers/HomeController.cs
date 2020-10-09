@@ -17,12 +17,12 @@ namespace ShortUrl.Controllers
 {
     public class HomeController : Controller
     {
-         LinksContext context;
+        LinksContext context;
 
         public HomeController(LinksContext context)
         {
             this.context = context;
-        }
+        }       
 
         [Route("{url}")]
         public void Index2(string url)
@@ -141,7 +141,7 @@ namespace ShortUrl.Controllers
             return View(link);
         }
 
-        [HttpPost]
+        [HttpPost]        
         public ActionResult Edit(Link link)                         
         {           
             if (ModelState.IsValid) //проверка на ошибки в аттрибутах модели
@@ -167,7 +167,7 @@ namespace ShortUrl.Controllers
                 return View();
             }
             
-        }
+        }        
 
     }
 }
